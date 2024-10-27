@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Gallery</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background: #007BFF;
+            color: white;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            /* Center the items */
+        }
+
+        .media-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+            width: calc(33.333% - 10px);
+            /* 3 items per row */
+            max-width: 300px;
+            /* Max width for better presentation */
+        }
+
+        .media-item:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        img,
+        video {
+            width: 100%;
+            height: 200px;
+            /* Fixed height for uniformity */
+            object-fit: cover;
+            /* Ensures media fit their container */
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Media Gallery</h1>
+    </header>
+    <main>
+        <div id="gallery" class="gallery"></div>
+    </main>
+    <footer>
+        <p>© 2024 Your Name. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gallery = document.getElementById('gallery');
+            const mediaFiles = [
+                'p/20221210_164939.png',
+                'p/20221210_193709.jpg',
+                'p/1670733521688.jpg',
+                'p/1670733521723.jpg',
+                'p/1670733521863.jpg',
+                'p/1670733521933.jpg',
+                'p/1670733521944.jpg',
+                'p/1670733522403.jpg',
+                'p/1670733522466.jpg',
+                'p/1670733522472.jpg',
+                'p/1670733522780.jpg',
+                'p/DSCN2168.JPG',
+                'p/IMG_1589.JPG',
+                'p/IMG_20221210_170848.jpg',
+                'p/IMG-20221210-WA0004.jpg',
+                'p/e/VID_20221210_183801.mp4',
+                'p/e/VID_99531016_010908_938.mp4',
+                'p/e/VID_99541026_022352_259.mp4',
+                'p/e/VID_99560718_105733_801.mp4',
+                'p/e/VID_99590113_055303_198.mp4',
+                'p/e/VID_99660625_095304_566.mp4',
+                'p/e/VID_99701212_203025_554.mp4',
+                'p/e/VID_99760929_141120_224.mp4',
+                'p/e/VID_100580714_162105_853.mp4',
+                'p/e/VID_101200521_212818_650.mp4',
+                'p/e/VID-20221212-WA0002.mp4'
+            ];
+
+            mediaFiles.forEach(file => {
+                const mediaItem = document.createElement('div');
+                mediaItem.classList.add('media-item');
+
+                const fileName = file.split('/').pop();
+                const altText = fileName.replace(/\.\w+$/, '');
+
+                if (file.endsWith('.mp4') || file.endsWith('.webm')) {
+                    const video = document.createElement('video');
+                    video.src = file;
+                    video.controls = true;
+                    video.alt = altText; // Accessibility
+                    mediaItem.appendChild(video);
+                } else {
+                    const img = document.createElement('img');
+                    img.src = file;
+                    img.alt = altText; // Add alt text
+                    img.loading = 'lazy';
+                    mediaItem.appendChild(img);
+                }
+
+                gallery.appendChild(mediaItem);
+            });
+        });
+    </script>
+</body>
+
+</html>
